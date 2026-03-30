@@ -14,6 +14,12 @@ class Program
             Price = 100,
             Quantity = 10
         });
+        orderBook.AddOrder(new Order
+        {
+            Side = OrderSide.Buy,
+            Price = 100,
+            Quantity = 5
+        });
 
         orderBook.AddOrder(new Order
         {
