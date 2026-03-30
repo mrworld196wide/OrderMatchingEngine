@@ -29,5 +29,8 @@ class Program
         });
 
         orderBook.Print();
+        orderBook.GetBestBuy();
+        orderBook.GetBestSell();
+
     }
 }

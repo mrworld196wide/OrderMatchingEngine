@@ -39,5 +39,23 @@ namespace OrderMatchingEngine.Services
                 Console.WriteLine($"Price: {kvp.Key}, Count: {kvp.Value.Count}");
             }
         }
+
+        public void GetBestBuy()
+        {
+            if (buyOrders.Count == 0)
+                Console.WriteLine("No Vlaue Found");
+
+            var bestPriceLevel = buyOrders.First();
+            Console.WriteLine(bestPriceLevel.Value.Peek());
+        }
+
+        public void GetBestSell()
+        {
+            if (sellOrders.Count == 0)
+                Console.WriteLine("No Vlaue Found");
+
+            var bestPriceLevel = sellOrders.First();
+            Console.WriteLine(bestPriceLevel.Value.Peek());
+        }
     }
 }
