@@ -40,22 +40,34 @@ namespace OrderMatchingEngine.Services
             }
         }
 
-        public void GetBestBuy()
+        public Order? GetBestBuy()
         {
-            if (buyOrders.Count == 0)
-                Console.WriteLine("No Vlaue Found");
+            if (buyOrders.Count == 0) return null;
 
             var bestPriceLevel = buyOrders.First();
-            Console.WriteLine(bestPriceLevel.Value.Peek());
+            return bestPriceLevel.Value.Peek();
         }
 
-        public void GetBestSell()
+        public Order? GetBestSell()
         {
-            if (sellOrders.Count == 0)
-                Console.WriteLine("No Vlaue Found");
+            if (sellOrders.Count == 0) return null;
 
             var bestPriceLevel = sellOrders.First();
-            Console.WriteLine(bestPriceLevel.Value.Peek());
+            return bestPriceLevel.Value.Peek();
+        }
+
+        public void RemoveOrder(Order order)
+        {
+            var book = order.Side == OrderSide.Buy ? buyOrders : sellOrders;
+            if (!book.ContainsKey(order.Price)) return;
+
+            var queue = book[order.Price];
+            queue.Dequeue(); 
+
+            if (queue.Count == 0)
+            {
+                book.Remove(order.Price);
+            }
         }
     }
 }
