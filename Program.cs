@@ -8,7 +8,7 @@ class Program
         Console.WriteLine("Order Matching Engine Started...");
         var orderBook = new OrderBook();
         var engine = new MatchingEngine(orderBook);
-
+        var positionService = new PositionService();
         //orderBook.AddOrder(new Order
         //{
         //    Side = OrderSide.Buy,
@@ -49,6 +49,7 @@ class Program
         orderBook.CancelOrder(order1.Id);
 
         orderBook.Print();
+        positionService.Print();
 
     }
 }
