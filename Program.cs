@@ -33,22 +33,24 @@ class Program
         //orderBook.GetBestBuy();
         //orderBook.GetBestSell();
 
+        engine.ProcessOrder(new Order {Side = OrderSide.Sell, Price =95 ,Quantity=5 });
 
-        var order1 = new Order { Side = OrderSide.Sell, Price = 95, Quantity = 5 };
-        var sellTrades =  engine.ProcessOrder(order1);
+        var order1 = new Order { Side = OrderSide.Buy, Price = 100, Quantity = 10 };
+        var trades =  engine.ProcessOrder(order1);
 
         //var buyTrades = engine.ProcessOrder(new Order { Side = OrderSide.Buy, Price = 100, Quantity = 10 });
 
-        //foreach (var trade in buyTrades)
-        //{
-        //    Console.WriteLine($"TRADE: {trade.Quantity} @ {trade.Price}");
-        //}
+        foreach (var trade in trades)
+        {
+            Console.WriteLine($"TRADE: {trade.Quantity} @ {trade.Price}");
+            positionService.UpdatePosition(trade, OrderSide.Buy);
+        }
 
-        orderBook.ModifyOrder(order1.Id, 105, 8);
+        //orderBook.ModifyOrder(order1.Id, 105, 8);
 
-        orderBook.CancelOrder(order1.Id);
+        //orderBook.CancelOrder(order1.Id);
 
-        orderBook.Print();
+        //orderBook.Print();
         positionService.Print();
 
     }
