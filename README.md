@@ -1,8 +1,4 @@
 # OrderMatchingEngine
-# 🚀 Order Matching Engine (.NET)
-
-## 📌 Overview
-
 This project implements an **in-memory Order Matching Engine** along with a basic **Position Tracking System**, designed to simulate how trading systems process and match buy/sell orders.
 
 The system focuses on:
