@@ -5,53 +5,44 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Order Matching Engine Started...");
+        Console.WriteLine("Order Matching Engine Started");
+
         var orderBook = new OrderBook();
         var engine = new MatchingEngine(orderBook);
         var positionService = new PositionService();
-        //orderBook.AddOrder(new Order
-        //{
-        //    Side = OrderSide.Buy,
-        //    Price = 100,
-        //    Quantity = 10
-        //});
-        //orderBook.AddOrder(new Order
-        //{
-        //    Side = OrderSide.Buy,
-        //    Price = 100,
-        //    Quantity = 5
-        //});
 
-        //orderBook.AddOrder(new Order
-        //{
-        //    Side = OrderSide.Sell,
-        //    Price = 105,
-        //    Quantity = 5
-        //});
-
-        //orderBook.Print();
-        //orderBook.GetBestBuy();
-        //orderBook.GetBestSell();
-
-        engine.ProcessOrder(new Order {Side = OrderSide.Sell, Price =95 ,Quantity=5 });
-
-        var order1 = new Order { Side = OrderSide.Buy, Price = 100, Quantity = 10 };
-        var trades =  engine.ProcessOrder(order1);
-
-        //var buyTrades = engine.ProcessOrder(new Order { Side = OrderSide.Buy, Price = 100, Quantity = 10 });
-
-        foreach (var trade in trades)
+        void Process(Order order)
         {
-            Console.WriteLine($"TRADE: {trade.Quantity} @ {trade.Price}");
-            positionService.UpdatePosition(trade, OrderSide.Buy);
+            Console.WriteLine("\n -------------------------------------------------------------");
+            Console.WriteLine($"\n{order.Side} {order.Quantity} @ {order.Price}");
+
+            var trades = engine.ProcessOrder(order);
+
+            if (trades.Count == 0)
+            {
+                Console.WriteLine("No trades executed.");
+            }
+
+            foreach (var trade in trades)
+            {
+                Console.WriteLine($"TRADE: {trade.Quantity} @ {trade.Price}");
+                positionService.UpdatePosition(trade, OrderSide.Buy);
+            }
+
+            Console.WriteLine("\nPosition:");
+            positionService.Print();
+
+            Console.WriteLine("\nOrderBook:");
+            orderBook.Print();
         }
 
-        //orderBook.ModifyOrder(order1.Id, 105, 8);
+        Process(new Order { Side = OrderSide.Buy, Price = 110, Quantity = 10 });
+        Process(new Order { Side = OrderSide.Buy, Price = 110, Quantity = 15 });
+        Process(new Order { Side = OrderSide.Buy, Price = 105, Quantity = 5 });
+        Process(new Order { Side = OrderSide.Buy, Price = 100, Quantity = 5 });
 
-        //orderBook.CancelOrder(order1.Id);
+        Process(new Order { Side = OrderSide.Sell, Price = 102, Quantity = 45 });
 
-        //orderBook.Print();
-        positionService.Print();
-
+        Console.WriteLine("\nDone");
     }
 }
