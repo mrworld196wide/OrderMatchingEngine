@@ -36,17 +36,24 @@ class Program
             orderBook.Print();
         }
 
-        Process(new Order { Side = OrderSide.Buy, Price = 110, Quantity = 10 });
-        Process(new Order { Side = OrderSide.Buy, Price = 110, Quantity = 15 });
-        Process(new Order { Side = OrderSide.Buy, Price = 105, Quantity = 5 });
-        Process(new Order { Side = OrderSide.Buy, Price = 100, Quantity = 5 });
+        //Process(new Order { Side = OrderSide.Buy, Price = 110, Quantity = 10 });
+        //Process(new Order { Side = OrderSide.Buy, Price = 110, Quantity = 15 });
+        //Process(new Order { Side = OrderSide.Buy, Price = 105, Quantity = 5 });
+        //Process(new Order { Side = OrderSide.Buy, Price = 100, Quantity = 5 });
 
-        Process(new Order { Side = OrderSide.Sell, Price = 102, Quantity = 45 });
+        //Process(new Order { Side = OrderSide.Sell, Price = 102, Quantity = 45 });
 
-        Console.WriteLine("\nDone");
+        //Console.WriteLine("\nDone");
 
+        
+        
         var b3 = new Order { Side = OrderSide.Buy, Price = 90, Quantity = 5 };
         var b4 = new Order { Side = OrderSide.Buy, Price = 91, Quantity = 5 };
+        var b5 = new Order { Side = OrderSide.Buy, Price = 91, Quantity = 5 };
+        orderBook.AddOrder(b3);
+        orderBook.AddOrder(b4);
+        orderBook.AddOrder(b5);
+
         Console.WriteLine("\nCancel Order:");
         orderBook.CancelOrder(b4.Id);
         orderBook.Print();
